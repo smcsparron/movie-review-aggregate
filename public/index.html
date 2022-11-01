@@ -2,10 +2,98 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Movie Review Aggregate</title>
   <link rel="stylesheet" href="main.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="bundle.js" async></script>
 </head>
+
 <body>
-  <h1 data-controller="example"></h1>
+  <div class="container d-flex">
+    <div class="row justify-content-center flex-grow-1">
+      <div class="col-12 big-card-movies my-4 p-4 rounded-3">
+        <div class="row justify-content-center">
+          <h1 class="orbitron">Movie Review Aggregate</h1>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-sm-12 col-lg-6 " data-controller="movie-search">
+            <form class="d-flex my-5" data-action="submit->movie-search#search">
+              <input type="text" class="form-control flex-grow-1 me-2 orbitron" placeholder="Search for a movie..." data-movie-search-target="text">
+              <input type="submit" value="Search" class="btn btn-primary orbitron" data-movie-search-target="submit">
+            </form>
+        </div>
+        <!-- cards go here -->
+        <div class="card mb-3">
+          <div class="row g-0">
+            <div class="col-3">
+              <img src="https://picsum.photos/200/300" class="img-fluid rounded-1 py-2" alt="...">
+            </div>
+            <div class="col-9 text-start">
+              <div class="card-body">
+                <h5 class="card-title">Movie Title</h5>
+                <p class="card-text mb-2">An epic fantasy adventure based on the timeless Arthurian legend, THE GREEN KNIGHT tells the story of Sir Gawain (Dev Patel), King Arthur's reckless and headstrong nephew, who embarks on a daring quest to confront the eponymous Green Knight, a gigantic emerald-skinned stranger and tester of men. Gawain contends with ghosts, giants, thieves, and schemers in what becomes a deeper journey......</p>
+
+                <div class="row">
+                  <!-- Rotten Tomatoes Rating -->
+                  <div class="col d-flex flex-column align-items-center">
+                    <img src="./images/rottentomatoes_logo.png" class="img-review-thumbnail">
+                    <div class="d-flex justify-content-center">
+                      <div class="tomatometer">
+                        <img src="./images/fresh.png" class="tomato">
+                        <span>89%</span>
+                      </div>
+                      <div class="tomatometer">
+                        <img src="./images/fresh_pop.png" class="tomato">
+                        <span>50%</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- IMDB rating -->
+                  <div class="col d-flex flex-column align-items-center">
+                    <img src="./images/IMDB_logo.png" class="img-review-thumbnail">
+                    <div class="d-flex justify-content-center">
+                      <div class="tomatometer">
+                        <img src="./images/star.png" class="tomato">
+                        <span>6.6/10</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Metacritic rating -->
+                  <div class="col d-flex flex-column align-items-center">
+                    <img src="./images/metacritic_logo.png" class="img-review-thumbnail">
+                    <div class="d-flex justify-content-center">
+                      <div class="tomatometer">
+                        <img src="./images/meta_positive.png" class="tomato">
+                        <span>7.6</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Average calculation -->
+                  <div class="col d-flex flex-column align-items-center">
+                    <img src="./images/metacritic_logo.png" class="img-review-thumbnail">
+                    <div class="d-flex justify-content-center">
+                      <div class="tomatometer">
+                        <img src="./images/meta_positive.png" class="tomato">
+                        <span>7.6</span>
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
 </body>
+
 </html>
