@@ -18,7 +18,7 @@
   <div class="container d-flex">
     <div class="row justify-content-center flex-grow-1">
       <!-- single large card -->
-      <div class="col-12 big-card-movies my-4 p-4 rounded-3">
+      <div class="col-12 big-card-movies my-2 p-3 rounded-3">
         <!-- page title heading -->
         <div class="row justify-content-center">
           <h1 class="orbitron">Movie Review Aggregate</h1>
@@ -26,7 +26,7 @@
         <!-- search box -->
         <div class="row justify-content-center">
           <div class="col-sm-12 col-lg-6 " data-controller="movie-search">
-            <form class="d-flex my-5" data-action="submit->movie-search#search">
+            <form class="d-flex my-3" data-action="submit->movie-search#search">
               <input type="text" class="form-control flex-grow-1 me-2 orbitron" placeholder="Search for a movie..." data-movie-search-target="text">
               <input type="submit" value="Search" class="btn btn-primary orbitron" data-movie-search-target="submit">
             </form>
@@ -37,6 +37,16 @@
             <!-- Movie Poster -->
             <div class="col-6 movie-poster">
               <img src="https://picsum.photos/150/222" class="img-fluid rounded-1 pt-3" alt="...">
+            </div>
+            <div class="col-6 movie-details">
+              <ul>
+                <li>Title: The Green Knight</li>
+                <li>Year: 2021</li>
+                <li>Rated: R</li>
+                <li>Released: 30 Jul 2021</li>
+                <li>Runtime: 130 min</li>
+                <li>Genre: Adventure, Drama, Fantasy</li>
+              </ul>
             </div>
             <!-- Movie description -->
             <div class="col-12 text-start">

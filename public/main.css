@@ -1,7 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: #282A36 !important;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 }
 
 .big-card-movies {
@@ -41,4 +45,17 @@ h1 {
 
 .rating-box {
   padding: 10px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0px;
+  padding-left: 0px !important;
+  padding-top: 16px;
+  text-align: left;
+}
+
+/* Removing bootstrap default card padding */
+.card {
+  --bs-card-spacer-x: 0rem !important;
 }
