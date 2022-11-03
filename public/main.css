@@ -91,3 +91,7 @@ p, li, span {
 .btn-primary:hover {
   background-color: #7252d3 !important;
 }
+
+.movie-search-results {
+  padding: 0px !important;
+}

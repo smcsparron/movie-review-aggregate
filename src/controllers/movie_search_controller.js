@@ -3,14 +3,47 @@ import { Controller } from "@hotwired/stimulus"
 const myApiKey = "d512529b"
 
 export default class extends Controller {
-  static targets = [ "text", "submit", "displayMovies" ]
+  static targets = [ "text", "submit", "movieSearchCards", "movieSearchCards", "movieDetailsCard" ]
 
   connect() {
     console.log(`Hello from the movie search controller`)
   }
 
+  capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   displayMovies(data) {
-    console.log(data);
+    console.log(data.Search[0]);
+    this.movieSearchCardsTarget.innerHTML = "";
+    data.Search.forEach(movie => {
+      this.movieSearchCardsTarget.insertAdjacentHTML("beforeend", `
+      <div class="card mb-3" data-movie-search-target="movieSearchCard">
+        <div class="row g-0">
+          <!-- Movie Poster -->
+          <div class="col-6 movie-poster">
+            <img src="${movie.Poster}" class="img-fluid rounded-1 p-3" alt="${movie.Title} Poster">
+          </div>
+          <div class="col-6 movie-details">
+            <ul>
+              <li>${movie.Title}</li>
+              <li>${movie.Year}</li>
+              <li>${movie.Type[0].toUpperCase() + movie.Type.substring(1)}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      `);
+    });
+    this.movieSearchCardsTarget.hidden = false;
+  }
+
+  selectMovie(event) {
+
+  }
+
+  displayMovieDetailsPage(movieData) {
+    console.log(movieData);
   }
 
   fetchMovies(query) {
@@ -25,22 +58,3 @@ export default class extends Controller {
     this.fetchMovies(this.textTarget.value);
   }
 }
-
-
-
-
-// <div class="card mb-3">
-// <div class="row g-0">
-//   <!-- Movie Poster -->
-//   <div class="col-6 movie-poster">
-//     <img src="https://picsum.photos/150/222" class="img-fluid rounded-1 py-3" alt="...">
-//   </div>
-//   <div class="col-6 movie-details">
-//     <ul>
-//       <li>Title:</li>
-//       <li>Year:</li>
-//       <li>Type:</li>
-//     </ul>
-//   </div>
-// </div>
-// </div>
