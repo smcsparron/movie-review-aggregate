@@ -14,11 +14,10 @@ export default class extends Controller {
   }
 
   displayMovies(data) {
-    console.log(data.Search[0]);
     this.movieSearchCardsTarget.innerHTML = "";
     data.Search.forEach(movie => {
       this.movieSearchCardsTarget.insertAdjacentHTML("beforeend", `
-      <div class="card mb-3" data-movie-search-target="movieSearchCard">
+      <div class="card mb-3" data-movie-search-target="movieSearchCard" data-action="click->movie-search#selectMovie">
         <div class="row g-0">
           <!-- Movie Poster -->
           <div class="col-6 movie-poster">
@@ -38,8 +37,8 @@ export default class extends Controller {
     this.movieSearchCardsTarget.hidden = false;
   }
 
-  selectMovie(event) {
-
+  selectMovie(movie) {
+    // console.log(this.movie) need to select movie here
   }
 
   displayMovieDetailsPage(movieData) {
