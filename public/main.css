@@ -75,6 +75,7 @@ p, li, span {
 
 .form-control {
   background-color:#242629 !important;
+  color: white !important;
 }
 
 ::placeholder {

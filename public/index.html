@@ -18,20 +18,38 @@
   <div class="container d-flex">
     <div class="row justify-content-center flex-grow-1">
       <!-- single large card -->
-      <div class="col-12 big-card-movies py-1 px-3 rounded-3">
+      <div class="col-12 big-card-movies py-1 px-3 rounded-3" data-controller="movie-search">
         <!-- page title heading -->
         <div class="row justify-content-center">
           <h1 class="orbitron">Movie Review Aggregate</h1>
         </div>
         <!-- search box -->
         <div class="row justify-content-center">
-          <div class="col-sm-12 col-lg-6 " data-controller="movie-search">
+          <div class="col-sm-12 col-lg-6">
             <form class="d-flex my-3" data-action="submit->movie-search#search">
               <input type="text" class="form-control flex-grow-1 me-2 orbitron" placeholder="Search for a movie..." data-movie-search-target="text">
               <input type="submit" value="Search" class="btn btn-primary orbitron" data-movie-search-target="submit">
             </form>
         </div>
-        <!-- movie card -->
+
+
+        <div class="card mb-3">
+          <div class="row g-0">
+            <!-- Movie Poster -->
+            <div class="col-6 movie-poster">
+              <img src="https://picsum.photos/150/222" class="img-fluid rounded-1 py-3" alt="...">
+            </div>
+            <div class="col-6 movie-details">
+              <ul>
+                <li>Title:</li>
+                <li>Year:</li>
+                <li>Type:</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- movie details card -->
         <div class="card mb-3">
           <div class="row g-0">
             <!-- Movie Poster -->
@@ -110,6 +128,8 @@
               </div>
             </div>
           </div>
+
+
         </div>
   </div>
 </body>
