@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 const myApiKey = "d512529b"
 
 export default class extends Controller {
-  static targets = [ "text", "submit", "movieSearchCards", "movieListCard", "movieDetailsCard" ]
+  static targets = [ "text", "submit", "movieSearchCards", "movieCard", "movieDetailsCard" ]
 
   connect() {
     console.log(`Hello from the movie search controller`)
@@ -13,11 +13,11 @@ export default class extends Controller {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  displayMoviesList(data) {
+  displayMoviesList(data) {``
     this.movieSearchCardsTarget.innerHTML = "";
     data.Search.forEach(movie => {
       this.movieSearchCardsTarget.insertAdjacentHTML("beforeend", `
-      <div data-imdbid=${movie.imdbID} class="card mb-3" data-movie-search-target="movieListCard" data-action="click->movie-search#selectMovie">
+      <div data-imdbid=${movie.imdbID} class="card mb-3" data-movie-search-target="movieCard" data-action="click->movie-search#selectMovie">
         <div class="row g-0">
           <!-- Movie Poster -->
           <div class="col-6 movie-poster">
@@ -37,15 +37,17 @@ export default class extends Controller {
     this.movieSearchCardsTarget.hidden = false;
   }
 
-  selectMovie(event) {
-    console.log(event.currentTarget.dataset.imdbid)
+  displaySelectedMovieDetailsPage(data) {
+    this.movieSearchCardsTarget.hidden = true;
+    console.log(data);
   }
 
-  displaySelectedMovieDetailsPage(movieData) {
-    console.log(movieData);
+  selectMovie(event) {
+    this.fetchMovieDetails(event.currentTarget.dataset.imdbid)
   }
 
   fetchMoviesList(query) {
+    // searching using the 's' tag which gives a list back
     const url = `https://www.omdbapi.com/?s=${query}&apikey=${myApiKey}`;
     fetch(url)
       .then(response => response.json())
@@ -53,11 +55,11 @@ export default class extends Controller {
   }
 
   fetchMovieDetails(query) {
-    // searching using the imdbID in the query
-    const url = `https://www.omdbapi.com/?t=${query}&apikey=${myApiKey}`;
+    // searching using the imdbID in the query i parameter
+    const url = `https://www.omdbapi.com/?i=${query}&apikey=${myApiKey}`;
     fetch(url)
       .then(response => response.json())
-      .then(data => this.displayMoviesList(data));
+      .then(data => this.displaySelectedMovieDetailsPage(data));
   }
 
   search(event) {
