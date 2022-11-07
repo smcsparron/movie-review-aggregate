@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 const myApiKey = "d512529b"
 
 export default class extends Controller {
-  static targets = [ "text", "submit", "movieSearchCards", "movieSearchCards", "movieDetailsCard" ]
+  static targets = [ "text", "submit", "movieSearchCards", "movieListCard", "movieDetailsCard" ]
 
   connect() {
     console.log(`Hello from the movie search controller`)
@@ -13,11 +13,11 @@ export default class extends Controller {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  displayMovies(data) {
+  displayMoviesList(data) {
     this.movieSearchCardsTarget.innerHTML = "";
     data.Search.forEach(movie => {
       this.movieSearchCardsTarget.insertAdjacentHTML("beforeend", `
-      <div class="card mb-3" data-movie-search-target="movieSearchCard" data-action="click->movie-search#selectMovie">
+      <div data-imdbid=${movie.imdbID} class="card mb-3" data-movie-search-target="movieListCard" data-action="click->movie-search#selectMovie">
         <div class="row g-0">
           <!-- Movie Poster -->
           <div class="col-6 movie-poster">
@@ -37,23 +37,31 @@ export default class extends Controller {
     this.movieSearchCardsTarget.hidden = false;
   }
 
-  selectMovie(movie) {
-    // console.log(this.movie) need to select movie here
+  selectMovie(event) {
+    console.log(event.currentTarget.dataset.imdbid)
   }
 
-  displayMovieDetailsPage(movieData) {
+  displaySelectedMovieDetailsPage(movieData) {
     console.log(movieData);
   }
 
-  fetchMovies(query) {
+  fetchMoviesList(query) {
     const url = `https://www.omdbapi.com/?s=${query}&apikey=${myApiKey}`;
     fetch(url)
       .then(response => response.json())
-      .then(data => this.displayMovies(data));
+      .then(data => this.displayMoviesList(data));
+  }
+
+  fetchMovieDetails(query) {
+    // searching using the imdbID in the query
+    const url = `https://www.omdbapi.com/?t=${query}&apikey=${myApiKey}`;
+    fetch(url)
+      .then(response => response.json())
+      .then(data => this.displayMoviesList(data));
   }
 
   search(event) {
     event.preventDefault();
-    this.fetchMovies(this.textTarget.value);
+    this.fetchMoviesList(this.textTarget.value);
   }
 }
