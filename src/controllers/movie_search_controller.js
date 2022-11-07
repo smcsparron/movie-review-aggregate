@@ -38,8 +38,99 @@ export default class extends Controller {
   }
 
   displaySelectedMovieDetailsPage(data) {
+    // Hiding search cards
     this.movieSearchCardsTarget.hidden = true;
-    console.log(data);
+
+    // Resetting movie details card
+    this.movieDetailsCardTarget.innerHTML = "";
+
+    // Inserting movie data
+    this.movieDetailsCardTarget.insertAdjacentHTML("afterbegin", `
+    <div class="row g-0">
+    <!-- Movie Poster -->
+    <div class="col-6 movie-poster">
+      <img src="${data.Poster}" class="img-fluid rounded-1 pt-3" alt="${data.Title} Poster">
+    </div>
+    <div class="col-6 movie-details">
+      <ul>
+        <li><span style="font-weight:bold">Year:</span> ${data.Year}</li>
+        <li><span style="font-weight:bold">Released:</span> ${data.Released}</li>
+        <li><span style="font-weight:bold">Rated:</span> ${data.Rated}</li>
+        <li><span style="font-weight:bold">Runtime:</span> ${data.Runtime}</li>
+        <li><span style="font-weight:bold">Genre:</span> ${data.Genre}</li>
+        <li><span style="font-weight:bold">Actors:</span> ${data.Actors}</li>
+        <li><span style="font-weight:bold">Director:</span> ${data.Director}</li>
+        <li><span style="font-weight:bold">Language:</span> ${data.Language}</li>
+        <li><span style="font-weight:bold">Country:</span> ${data.Country}</li>
+        <li><span style="font-weight:bold">Awards:</span> ${data.Awards}</li>
+      </ul>
+    </div>
+    <!-- Movie description -->
+    <div class="col-12 text-start">
+      <div class="card-body">
+        <h5 class="card-title">${data.Title}</h5>
+        <p class="card-text">${data.Plot}</p>
+
+        <div class="row">
+          <!-- Rotten Tomatoes Rating -->
+          <div class="col d-flex flex-column align-items-center rating-box">
+            <img src="./images/rottentomatoes_logo.png" class="img-review-thumbnail">
+            <div class="d-flex justify-content-center">
+              <div class="tomatometer d-flex align-items-center">
+                <img src="./images/fresh.png" class="tomato">
+                <span>${data.Ratings[1].Value}</span>
+              </div>
+              <div class="tomatometer d-flex align-items-center">
+                <img src="./images/fresh_pop.png" class="tomato">
+                <span>TBA</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- IMDB rating -->
+          <div class="col d-flex flex-column align-items-center rating-box">
+            <img src="./images/IMDB_logo.png" class="img-review-thumbnail">
+            <div class="d-flex justify-content-center">
+              <div class="tomatometer d-flex align-items-center">
+                <img src="./images/star.png" class="tomato">
+                <span>${data.Ratings[0].Value}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Metacritic rating -->
+          <div class="col d-flex flex-column align-items-center rating-box">
+            <img src="./images/metacritic_logo.png" class="img-review-thumbnail">
+            <div class="d-flex justify-content-center">
+              <div class="tomatometer d-flex align-items-center">
+                <img src="./images/meta_positive.png" class="tomato">
+                <span>${data.Ratings[2].Value}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Average calculation -->
+          <div class="col d-flex flex-column align-items-center rating-box">
+            <img src="./images/average_text.png" class="img-review-thumbnail">
+            <div class="d-flex justify-content-center">
+              <div class="tomatometer d-flex align-items-center">
+                <img src="./images/average.png" class="tomato">
+                <span>TBA</span>
+              </div>
+            </div>
+          </div>
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    `);
+
+    // Un-hiding main movie details card
+    this.movieDetailsCardTarget.hidden = false;
   }
 
   selectMovie(event) {
@@ -56,7 +147,7 @@ export default class extends Controller {
 
   fetchMovieDetails(query) {
     // searching using the imdbID in the query i parameter
-    const url = `https://www.omdbapi.com/?i=${query}&apikey=${myApiKey}`;
+    const url = `https://www.omdbapi.com/?i=${query}&plot=full&apikey=${myApiKey}`;
     fetch(url)
       .then(response => response.json())
       .then(data => this.displaySelectedMovieDetailsPage(data));
