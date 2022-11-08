@@ -109,13 +109,17 @@ export default class extends Controller {
         <div class="row">
           <!-- Metacritic rating -->
           <div class="col d-flex flex-column align-items-center rating-box">
-            <img src="./images/metacritic_logo.png" class="img-review-thumbnail">
-            <div class="d-flex justify-content-center">
-              <div class="tomatometer d-flex align-items-center">
-                <img src="./images/meta_positive.png" class="tomato">
-                <span>${data.Ratings[2].Value}</span>
+
+            <a href="https://www.metacritic.com/movie/${data.Title.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g,"-").toLowerCase()}" target="_blank" class="d-flex flex-column align-items-center"">
+              <img src="./images/metacritic_logo.png" class="img-review-thumbnail">
+              <div class="d-flex justify-content-center">
+                <div class="tomatometer d-flex align-items-center">
+                  <img src="./images/meta_positive.png" class="tomato">
+                  <span>${data.Ratings[2].Value}</span>
+                </div>
               </div>
-            </div>
+            </a>
+
           </div>
 
           <!-- Average calculation -->
