@@ -47,8 +47,8 @@ export default class extends Controller {
   }
 
   displaySelectedMovieDetailsPage(data) {
-    console.log(data)
     const rottenTomatoRating = this.ratings(data)['Rotten Tomatoes']
+    const metacriticRating = this.ratings(data)['Metacritic']
 
     // Hiding search cards
     this.movieSearchCardsTarget.hidden = true;
@@ -121,7 +121,7 @@ export default class extends Controller {
               <div class="d-flex justify-content-center">
                 <div class="tomatometer d-flex align-items-center">
                   <img src="./images/meta_positive.png" class="tomato">
-                  <span>${this.ratings(data)['Metacritic'] ? this.ratings(data)['Metacritic'] : "N/A"}</span>
+                  <span>${metacriticRating ? metacriticRating : "N/A"}</span>
                 </div>
               </div>
             </a>
