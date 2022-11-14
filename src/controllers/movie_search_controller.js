@@ -46,7 +46,13 @@ export default class extends Controller {
     return ratings
   }
 
+  averageRating(data) {
+    const i = 99
+    return i
+  }
+
   displaySelectedMovieDetailsPage(data) {
+    console.log(data);
     const rottenTomatoRating = this.ratings(data)['Rotten Tomatoes']
     const metacriticRating = this.ratings(data)['Metacritic']
 
@@ -134,7 +140,7 @@ export default class extends Controller {
             <div class="d-flex justify-content-center">
               <div class="tomatometer d-flex align-items-center">
                 <img src="./images/average.png" class="tomato">
-                <span>TBA</span>
+                <span>${this.averageRating(data)}</span>
               </div>
             </div>
           </div>
