@@ -43,12 +43,26 @@ export default class extends Controller {
     data.Ratings.forEach(site => {
       ratings[site.Source] = site.Value
     })
-    return ratings
+    return ratings;
   }
 
   averageRating(data) {
-    const i = 99
-    return i
+    // removing "/100" or "%" and converting to a int to caculate average
+    const arr = []
+    arr.push(parseFloat(data.imdbRating) * 10)
+    if (this.ratings(data)['Rotten Tomatoes']) {
+      arr.push(parseInt(this.ratings(data)['Rotten Tomatoes'].slice(0, 2), 10));
+    }
+    if (this.ratings(data)['Metacritic']) {
+      arr.push(parseInt(this.ratings(data)['Metacritic'].slice(0, 2), 10));
+    }
+    // summing array
+    let sum = arr.reduce(function(a, b){
+      return a + b;
+    }, 0);
+    // calculating average and rounding
+    const average = Math.round( sum/arr.length );
+    return average;
   }
 
   displaySelectedMovieDetailsPage(data) {
