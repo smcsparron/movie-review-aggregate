@@ -93,10 +93,6 @@ export default class extends Controller {
                   <img src="./images/fresh.png" class="tomato">
                   <span>${rottenTomatoRating ? rottenTomatoRating : "N/A"}</span>
                 </div>
-                <div class="tomatometer d-flex align-items-center">
-                  <img src="./images/fresh_pop.png" class="tomato">
-                  <span>TBA</span>
-                </div>
               </div>
             </a>
           </div>
