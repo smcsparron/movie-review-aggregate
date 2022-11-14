@@ -1,5 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 
+
 const myApiKey = "d512529b"
 
 export default class extends Controller {
@@ -136,7 +137,7 @@ export default class extends Controller {
           <!-- Metacritic rating -->
           <div class="col d-flex flex-column align-items-center rating-box">
 
-            <a href="https://www.metacritic.com/search/all/${data.Title} ${data.Year}/results" target="_blank" class="d-flex flex-column align-items-center"">
+            <a href="https://www.metacritic.com/search/movie/${data.Title}/results" target="_blank" class="d-flex flex-column align-items-center"">
               <img src="./images/metacritic_logo.png" class="img-review-thumbnail">
               <div class="d-flex justify-content-center">
                 <div class="tomatometer d-flex align-items-center">
@@ -154,7 +155,7 @@ export default class extends Controller {
             <div class="d-flex justify-content-center">
               <div class="tomatometer d-flex align-items-center">
                 <img src="./images/average.png" class="tomato">
-                <span>${this.averageRating(data)}</span>
+                <span>${this.averageRating(data)}%</span>
               </div>
             </div>
           </div>
@@ -169,6 +170,7 @@ export default class extends Controller {
 
   selectMovie(event) {
     this.fetchMovieDetails(event.currentTarget.dataset.imdbid)
+    this.fetchTrailerHtml(event.currentTarget.dataset.imdbid)
   }
 
   fetchMoviesList(query) {
@@ -193,11 +195,10 @@ export default class extends Controller {
   }
 }
 
-
-// Search for movie on rotten tomatoes. Not reliable as sometimes picks wrong movie
-// href="https://www.rottentomatoes.com/m/${data.Title.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g,"_")
 // Below regex replace to remove all special characters and replace whitespace with underscore for rotten tomatoes movie link
 // console.log(data.Title.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g,"_"))
+// Search for movie on rotten tomatoes. Not reliable as sometimes picks wrong movie
+// href="https://www.rottentomatoes.com/m/${data.Title.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g,"_")
 
 // Metacritic search but unreliable moved to search page
 // href="https://www.metacritic.com/movie/${data.Title.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g,"-").toLowerCase()}"
