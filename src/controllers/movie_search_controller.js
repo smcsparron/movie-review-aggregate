@@ -38,8 +38,7 @@ export default class extends Controller {
   }
 
   displaySelectedMovieDetailsPage(data) {
-    // Below regex replace to remove all special characters and replace whitespace with underscore for rotten tomatoes movie link
-    // console.log(data.Title.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g,"_"))
+    console.log(data)
     // Hiding search cards
     this.movieSearchCardsTarget.hidden = true;
 
@@ -76,7 +75,7 @@ export default class extends Controller {
         <div class="row">
           <!-- Rotten Tomatoes Rating -->
           <div class="col d-flex flex-column align-items-center rating-box">
-            <a href="https://www.rottentomatoes.com/m/${data.Title.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g,"_")}" target="_blank" class="d-flex flex-column align-items-center">
+            <a href="https://www.rottentomatoes.com/search?search=${data.Title} ${data.Year}" target="_blank" class="d-flex flex-column align-items-center">
               <img src="./images/rottentomatoes_logo.png" class="img-review-thumbnail">
               <div class="d-flex justify-content-center">
                 <div class="tomatometer d-flex align-items-center">
@@ -166,3 +165,9 @@ export default class extends Controller {
     this.fetchMoviesList(this.textTarget.value);
   }
 }
+
+
+// Search for movie on rotten tomatoes. Not reliable as sometimes picks wrong movie
+// href="https://www.rottentomatoes.com/m/${data.Title.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g,"_")
+// Below regex replace to remove all special characters and replace whitespace with underscore for rotten tomatoes movie link
+// console.log(data.Title.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g,"_"))
