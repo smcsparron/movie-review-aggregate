@@ -37,8 +37,19 @@ export default class extends Controller {
     this.movieSearchCardsTarget.hidden = false;
   }
 
+  ratings(data) {
+    // get ratings array for movie omdb api, easier to access and display
+    const ratings = {};
+    data.Ratings.forEach(site => {
+      ratings[site.Source] = site.Value
+    })
+    return ratings
+  }
+
   displaySelectedMovieDetailsPage(data) {
     console.log(data)
+    const rottenTomatoRating = this.ratings(data)['Rotten Tomatoes']
+
     // Hiding search cards
     this.movieSearchCardsTarget.hidden = true;
 
@@ -80,7 +91,7 @@ export default class extends Controller {
               <div class="d-flex justify-content-center">
                 <div class="tomatometer d-flex align-items-center">
                   <img src="./images/fresh.png" class="tomato">
-                  <span>${data.Ratings[1].Value ? data.Ratings[1].Value : "N/A" }</span>
+                  <span>${rottenTomatoRating ? rottenTomatoRating : "N/A"}</span>
                 </div>
                 <div class="tomatometer d-flex align-items-center">
                   <img src="./images/fresh_pop.png" class="tomato">
@@ -97,7 +108,7 @@ export default class extends Controller {
               <div class="d-flex justify-content-center">
                 <div class="tomatometer d-flex align-items-center">
                   <img src="./images/star.png" class="tomato">
-                  <span>${data.Ratings[0].Value}</span>
+                  <span>${this.ratings(data)['Internet Movie Database']}</span>
                 </div>
               </div>
             </a>
@@ -109,12 +120,12 @@ export default class extends Controller {
           <!-- Metacritic rating -->
           <div class="col d-flex flex-column align-items-center rating-box">
 
-            <a href="https://www.metacritic.com/movie/${data.Title.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g,"-").toLowerCase()}" target="_blank" class="d-flex flex-column align-items-center"">
+            <a href="https://www.metacritic.com/search/all/${data.Title} ${data.Year}/results" target="_blank" class="d-flex flex-column align-items-center"">
               <img src="./images/metacritic_logo.png" class="img-review-thumbnail">
               <div class="d-flex justify-content-center">
                 <div class="tomatometer d-flex align-items-center">
                   <img src="./images/meta_positive.png" class="tomato">
-                  <span>${data.Ratings[2].Value}</span>
+                  <span>${this.ratings(data)['Metacritic'] ? this.ratings(data)['Metacritic'] : "N/A"}</span>
                 </div>
               </div>
             </a>
@@ -171,3 +182,6 @@ export default class extends Controller {
 // href="https://www.rottentomatoes.com/m/${data.Title.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g,"_")
 // Below regex replace to remove all special characters and replace whitespace with underscore for rotten tomatoes movie link
 // console.log(data.Title.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g,"_"))
+
+// Metacritic search but unreliable moved to search page
+// href="https://www.metacritic.com/movie/${data.Title.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g,"-").toLowerCase()}"
