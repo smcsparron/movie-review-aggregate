@@ -170,7 +170,6 @@ export default class extends Controller {
 
   selectMovie(event) {
     this.fetchMovieDetails(event.currentTarget.dataset.imdbid)
-    this.fetchTrailerHtml(event.currentTarget.dataset.imdbid)
   }
 
   fetchMoviesList(query) {
