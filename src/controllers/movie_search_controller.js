@@ -25,7 +25,7 @@ export default class extends Controller {
             <img src="${movie.Poster}" class="img-fluid rounded-1 p-3" alt="${movie.Title} Poster">
           </div>
           <div class="col-6 movie-details">
-            <ul>
+            <ul class="search-card-movie-details">
               <li>${movie.Title}</li>
               <li>${movie.Year}</li>
               <li>${movie.Type[0].toUpperCase() + movie.Type.substring(1)}</li>
@@ -86,7 +86,6 @@ export default class extends Controller {
     </div>
     <div class="col-6 movie-details">
       <ul>
-        <li><span style="font-weight:bold">Year:</span> ${data.Year}</li>
         <li><span style="font-weight:bold">Released:</span> ${data.Released}</li>
         <li><span style="font-weight:bold">Rated:</span> ${data.Rated}</li>
         <li><span style="font-weight:bold">Runtime:</span> ${data.Runtime}</li>

@@ -8,6 +8,19 @@ body {
   height: 100%;
 }
 
+p, li {
+  font-family: sans-serif;
+}
+
+ul {
+line-height:200%
+}
+
+.search-card-movie-details {
+  font-weight: bold;
+  font-size: larger;
+}
+
 .big-card-movies {
   text-align: center;
   background: #16161a;
