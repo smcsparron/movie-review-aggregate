@@ -51,7 +51,7 @@ export default class extends Controller {
   }
 
   averageRating(data) {
-    // removing "/100" or "%" and converting to a int to caculate average
+    // removing "/100" or "%" and converting to a int to calculate average
     const arr = []
     arr.push(parseFloat(data.imdbRating) * 10)
     if (this.ratings(data)['Rotten Tomatoes']) {
@@ -101,7 +101,7 @@ export default class extends Controller {
       </ul>
     </div>
     <!-- Movie description -->
-    <div class="col-12 text-start">
+    <div class="col-12 text-start px-3">
       <div class="card-body">
         <h5 class="card-title">${data.Title}</h5>
         <p class="card-text">${data.Plot}</p>
@@ -193,6 +193,12 @@ export default class extends Controller {
   search(event) {
     event.preventDefault();
     this.fetchMoviesList(this.textTarget.value);
+  }
+
+  toggleCard(event) {
+    event.preventDefault()
+    this.movieDetailsCardTarget.hidden = true;
+    this.movieSearchCardsTarget.hidden = false;
   }
 }
 
