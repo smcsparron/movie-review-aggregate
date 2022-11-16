@@ -14,18 +14,21 @@ export default class extends Controller {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  displayMoviesList(data) {``
+  displayMoviesList(data) {
+    // Un-hiding main movie details card
+    this.movieDetailsCardTarget.hidden = true;
+
     this.movieSearchCardsTarget.innerHTML = "";
     data.Search.forEach(movie => {
       this.movieSearchCardsTarget.insertAdjacentHTML("beforeend", `
       <div data-imdbid=${movie.imdbID} class="card mb-3" data-movie-search-target="movieCard" data-action="click->movie-search#selectMovie">
-        <div class="row g-0">
+        <div class="row g-0 movie-card">
           <!-- Movie Poster -->
           <div class="col-6 movie-poster">
             <img src="${movie.Poster}" class="img-fluid rounded-1 p-3" alt="${movie.Title} Poster">
           </div>
           <div class="col-6 movie-details">
-            <ul class="search-card-movie-details">
+            <ul class="search-card-movie-details-list">
               <li>${movie.Title}</li>
               <li>${movie.Year}</li>
               <li>${movie.Type[0].toUpperCase() + movie.Type.substring(1)}</li>

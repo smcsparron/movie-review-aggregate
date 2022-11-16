@@ -16,7 +16,7 @@ ul {
 line-height:200%
 }
 
-.search-card-movie-details {
+.search-card-movie-details-list {
   font-weight: bold;
   font-size: larger;
 }
@@ -135,6 +135,10 @@ p, li, span {
 
 .movie-details-poster {
   padding-right: 1em;
+}
+
+.movie-card {
+  cursor: pointer;
 }
 
 
