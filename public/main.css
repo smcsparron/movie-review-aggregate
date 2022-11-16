@@ -120,6 +120,9 @@ p, li, span {
   padding: 0px !important;
 }
 
+.movie-details-poster {
+  padding-right: 1em;
+}
 
 
 @media (max-width: 768px) {

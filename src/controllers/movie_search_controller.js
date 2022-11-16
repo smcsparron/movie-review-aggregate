@@ -20,18 +20,16 @@ export default class extends Controller {
       this.movieSearchCardsTarget.insertAdjacentHTML("beforeend", `
       <div data-imdbid=${movie.imdbID} class="card mb-3" data-movie-search-target="movieCard" data-action="click->movie-search#selectMovie">
         <div class="row g-0">
-          <div class="d-flex">
-            <!-- Movie Poster -->
-            <div class="col-6 movie-poster">
-              <img src="${movie.Poster}" class="img-fluid rounded-1 p-3" alt="${movie.Title} Poster">
-            </div>
-            <div class="col-6 movie-details">
-              <ul>
-                <li>${movie.Title}</li>
-                <li>${movie.Year}</li>
-                <li>${movie.Type[0].toUpperCase() + movie.Type.substring(1)}</li>
-              </ul>
-            </div>
+          <!-- Movie Poster -->
+          <div class="col-6 movie-poster">
+            <img src="${movie.Poster}" class="img-fluid rounded-1 p-3" alt="${movie.Title} Poster">
+          </div>
+          <div class="col-6 movie-details">
+            <ul>
+              <li>${movie.Title}</li>
+              <li>${movie.Year}</li>
+              <li>${movie.Type[0].toUpperCase() + movie.Type.substring(1)}</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -84,7 +82,7 @@ export default class extends Controller {
     <div class="row g-0">
     <!-- Movie Poster -->
     <div class="col-6 movie-poster">
-      <img src="${data.Poster}" class="img-fluid rounded-1 pt-3" alt="${data.Title} Poster">
+      <img src="${data.Poster}" class="img-fluid rounded-1 pt-3 movie-details-poster" alt="${data.Title} Poster">
     </div>
     <div class="col-6 movie-details">
       <ul>
