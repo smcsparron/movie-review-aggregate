@@ -78,17 +78,17 @@ h1 {
   width: 25px;
 }
 
-.test {
-  border: 2px black solid;
-  border-radius: 10px;
-}
-
 .rating-box {
   padding: 10px;
   margin: 8px;
   margin-top: 20px;
   border: #94a1b2 solid 1px;
   border-radius: 8px;
+}
+
+.rating {
+  font-weight: bold;
+  letter-spacing: 0.5px;
 }
 
 ul {
@@ -148,12 +148,6 @@ p, li, span {
 .error-code {
   font-size: 1.2rem;
 }
-
-.rating {
-  font-weight: bold;
-  letter-spacing: 0.5px;
-}
-
 
 @media (max-width: 768px) {
   h1 {
