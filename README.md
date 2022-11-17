@@ -16,5 +16,6 @@ I used the OMDB API for the movie search information. The goal was to get a bit 
 
 # What I think I can work on
 - Better structuring of files and folders
+- Having multiple controllers
 - Better naming of CSS elements
 - Cleaner code in general and being more DRY

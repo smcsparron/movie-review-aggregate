@@ -7,7 +7,6 @@ export default class extends Controller {
   static targets = [ "text", "submit", "movieSearchCards", "movieCard", "movieDetailsCard", "errorCode" ]
 
   connect() {
-    console.log(`Hello from the movie search controller`)
   }
 
   capitalize(string) {
@@ -15,15 +14,15 @@ export default class extends Controller {
   }
 
   displayMoviesList(data) {
-    console.log(data)
+    // Displays the movies list
     if (data.Response == 'False') {
       this.errorCodeTarget.innerText = `Error: ${data.Error}`
       this.errorCodeTarget.hidden = false;
     } else {
       this.errorCodeTarget.hidden = true;
-      // Un-hiding main movie details card
+      // Hiding main single movie details card
       this.movieDetailsCardTarget.hidden = true;
-
+      // Inserting HTML of the movie list
       this.movieSearchCardsTarget.innerHTML = "";
       data.Search.forEach(movie => {
         this.movieSearchCardsTarget.insertAdjacentHTML("beforeend", `
@@ -44,6 +43,7 @@ export default class extends Controller {
         </div>
         `);
       });
+    // un-hiding the search cards
     this.movieSearchCardsTarget.hidden = false;
     }
   }
@@ -59,6 +59,7 @@ export default class extends Controller {
 
   averageRating(data) {
     // removing "/100" or "%" and converting to a int to calculate average
+    // Did this separately incase one or both are missing from data
     const arr = []
     arr.push(parseFloat(data.imdbRating) * 10)
     if (this.ratings(data)['Rotten Tomatoes']) {
@@ -74,11 +75,12 @@ export default class extends Controller {
     // calculating average and rounding
     const average = Math.round( sum/arr.length );
     // return average;
-    // this.ratingIcon(average)
+    // this.ratingIcon(average) . * commented this out as was returning undefined when called from within display movie details page. Calling separately this is working
     return average
   }
 
   ratingIcon(average) {
+    // Setting ratings icon
     let ratingsObj = { average: average }
     if (average >= 70) {
       ratingsObj.image = "./images/like.png"
@@ -91,7 +93,7 @@ export default class extends Controller {
   }
 
   displaySelectedMovieDetailsPage(data) {
-    console.log(data);
+    // Displays the single movie details selected
     const rottenTomatoRating = this.ratings(data)['Rotten Tomatoes']
     const metacriticRating = this.ratings(data)['Metacritic']
     const avgScore = this.averageRating(data)
@@ -195,6 +197,7 @@ export default class extends Controller {
   }
 
   selectMovie(event) {
+    // selecting movie when clicked and fetching details
     this.fetchMovieDetails(event.currentTarget.dataset.imdbid)
   }
 
@@ -207,7 +210,7 @@ export default class extends Controller {
   }
 
   fetchMovieDetails(query) {
-    // searching using the imdbID in the query i parameter
+    // searching using the imdbID in the query i parameter. This gives more details back for a single movie
     const url = `https://www.omdbapi.com/?i=${query}&plot=full&apikey=${myApiKey}`;
     fetch(url)
       .then(response => response.json())
@@ -215,12 +218,14 @@ export default class extends Controller {
   }
 
   search(event) {
+    // When search submitted hide the list and refresh the data
     event.preventDefault();
     this.movieSearchCardsTarget.hidden = true;
     this.fetchMoviesList(this.textTarget.value);
   }
 
   toggleCard(event) {
+    // When in the details page, when card is clicked hides and shows the list page again
     event.preventDefault()
     this.movieDetailsCardTarget.hidden = true;
     this.movieSearchCardsTarget.hidden = false;
@@ -232,5 +237,5 @@ export default class extends Controller {
 // Search for movie on rotten tomatoes. Not reliable as sometimes picks wrong movie
 // href="https://www.rottentomatoes.com/m/${data.Title.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g,"_")
 
-// Metacritic search but unreliable moved to search page
+// Metacritic search but unreliable and changed to search page
 // href="https://www.metacritic.com/movie/${data.Title.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g,"-").toLowerCase()}"
