@@ -4,7 +4,7 @@ import { Controller } from "@hotwired/stimulus"
 const myApiKey = "d512529b"
 
 export default class extends Controller {
-  static targets = [ "text", "submit", "movieSearchCards", "movieCard", "movieDetailsCard" ]
+  static targets = [ "text", "submit", "movieSearchCards", "movieCard", "movieDetailsCard", "errorCode" ]
 
   connect() {
     console.log(`Hello from the movie search controller`)
@@ -18,8 +18,11 @@ export default class extends Controller {
     console.log(data)
     if (data.Response == 'False') {
       console.log(data.Error)
+      this.errorCodeTarget.innerText = `Error: ${data.Error}`
+      this.errorCodeTarget.hidden = false;
     } else {
       console.log("working")
+      this.errorCodeTarget.hidden = true;
       // Un-hiding main movie details card
       this.movieDetailsCardTarget.hidden = true;
 
@@ -198,6 +201,7 @@ export default class extends Controller {
 
   search(event) {
     event.preventDefault();
+    this.movieSearchCardsTarget.hidden = true;
     this.fetchMoviesList(this.textTarget.value);
   }
 
