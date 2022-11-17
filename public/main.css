@@ -149,6 +149,11 @@ p, li, span {
   font-size: 1.2rem;
 }
 
+.rating {
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
 
 @media (max-width: 768px) {
   h1 {

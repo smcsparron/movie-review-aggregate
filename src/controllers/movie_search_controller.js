@@ -17,11 +17,9 @@ export default class extends Controller {
   displayMoviesList(data) {
     console.log(data)
     if (data.Response == 'False') {
-      console.log(data.Error)
       this.errorCodeTarget.innerText = `Error: ${data.Error}`
       this.errorCodeTarget.hidden = false;
     } else {
-      console.log("working")
       this.errorCodeTarget.hidden = true;
       // Un-hiding main movie details card
       this.movieDetailsCardTarget.hidden = true;
@@ -75,13 +73,29 @@ export default class extends Controller {
     }, 0);
     // calculating average and rounding
     const average = Math.round( sum/arr.length );
-    return average;
+    // return average;
+    // this.ratingIcon(average)
+    return average
+  }
+
+  ratingIcon(average) {
+    let ratingsObj = { average: average }
+    if (average >= 70) {
+      ratingsObj.image = "./images/like.png"
+    } else if (average >= 45 && average < 70 ) {
+      ratingsObj.image = "./images/average.png"
+    } else {
+      ratingsObj.image = "./images/dislike.png"
+    }
+    return ratingsObj
   }
 
   displaySelectedMovieDetailsPage(data) {
     console.log(data);
     const rottenTomatoRating = this.ratings(data)['Rotten Tomatoes']
     const metacriticRating = this.ratings(data)['Metacritic']
+    const avgScore = this.averageRating(data)
+    const ratingObj = this.ratingIcon(avgScore)
 
     // Hiding search cards
     this.movieSearchCardsTarget.hidden = true;
@@ -91,7 +105,7 @@ export default class extends Controller {
 
     // Inserting movie data
     this.movieDetailsCardTarget.insertAdjacentHTML("afterbegin", `
-    <div class="row g-0" data-action="click->movie-search#toggleCard">
+    <div class="row g-0 movie-card" data-action="click->movie-search#toggleCard">
       <!-- Movie Poster -->
       <div class="col-6 movie-poster">
         <img src="${data.Poster}" class="img-fluid rounded-1 pt-3 movie-details-poster" alt="${data.Title} Poster">
@@ -125,7 +139,7 @@ export default class extends Controller {
             <div class="d-flex justify-content-center">
               <div class="tomatometer d-flex align-items-center">
                 <img src="./images/fresh.png" class="tomato">
-                <span>${rottenTomatoRating ? rottenTomatoRating : "N/A"}</span>
+                <span class="rating">${rottenTomatoRating ? rottenTomatoRating : "N/A"}</span>
                 </div>
               </div>
             </a>
@@ -138,7 +152,7 @@ export default class extends Controller {
             <div class="d-flex justify-content-center">
               <div class="tomatometer d-flex align-items-center">
                 <img src="./images/star.png" class="tomato">
-                <span>${this.ratings(data)['Internet Movie Database']}</span>
+                <span class="rating">${this.ratings(data)['Internet Movie Database']}</span>
               </div>
             </div>
           </a>
@@ -155,7 +169,7 @@ export default class extends Controller {
             <div class="d-flex justify-content-center">
               <div class="tomatometer d-flex align-items-center">
                 <img src="./images/meta_positive.png" class="tomato">
-                <span>${metacriticRating ? metacriticRating : "N/A"}</span>
+                <span class="rating">${metacriticRating ? metacriticRating : "N/A"}</span>
                 </div>
               </div>
             </a>
@@ -166,8 +180,8 @@ export default class extends Controller {
             <img src="./images/average_text.png" class="img-review-thumbnail">
             <div class="d-flex justify-content-center">
               <div class="tomatometer d-flex align-items-center">
-                <img src="./images/average.png" class="tomato">
-                <span>${this.averageRating(data)}%</span>
+                <img src="${ratingObj.image}" class="tomato">
+                <span class="rating">${ratingObj.average}%</span>
               </div>
             </div>
           </div>
