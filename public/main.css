@@ -141,6 +141,14 @@ p, li, span {
   cursor: pointer;
 }
 
+.movie-details-list-text {
+  letter-spacing: 0.5px;
+}
+
+.error-code {
+  font-size: 1.2rem;
+}
+
 
 @media (max-width: 768px) {
   h1 {
