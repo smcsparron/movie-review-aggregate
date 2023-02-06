@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 
-const myApiKey = process.env.API_KEY
+const myApiKey = "d512529b"
 
 export default class extends Controller {
   static targets = [ "text", "submit", "movieSearchCards", "movieCard", "movieDetailsCard", "errorCode" ]
