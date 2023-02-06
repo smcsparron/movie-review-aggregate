@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 
-const myApiKey = "d512529b"
+// const myApiKey = ""
 
 export default class extends Controller {
   static targets = [ "text", "submit", "movieSearchCards", "movieCard", "movieDetailsCard", "errorCode" ]
@@ -203,7 +203,7 @@ export default class extends Controller {
 
   fetchMoviesList(query) {
     // searching using the 's' tag which gives a list back
-    const url = `https://www.omdbapi.com/?s=${query}&apikey=${myApiKey}`;
+    const url = `https://www.omdbapi.com/?s=${query}&apikey=${process.env.myApiKey}`;
     fetch(url)
       .then(response => response.json())
       .then(data => this.displayMoviesList(data));
@@ -211,7 +211,7 @@ export default class extends Controller {
 
   fetchMovieDetails(query) {
     // searching using the imdbID in the query i parameter. This gives more details back for a single movie
-    const url = `https://www.omdbapi.com/?i=${query}&plot=full&apikey=${myApiKey}`;
+    const url = `https://www.omdbapi.com/?i=${query}&plot=full&apikey=${process.env.myApiKey}`;
     fetch(url)
       .then(response => response.json())
       .then(data => this.displaySelectedMovieDetailsPage(data));
